@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopyrightApplicationHelper", "CopyrightApplicationHelper\CopyrightApplicationHelper.csproj", "{B6F83EF9-4341-4C9A-B338-27FA2349894C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6F83EF9-4341-4C9A-B338-27FA2349894C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F83EF9-4341-4C9A-B338-27FA2349894C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F83EF9-4341-4C9A-B338-27FA2349894C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F83EF9-4341-4C9A-B338-27FA2349894C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {609F6A18-0ADA-4891-A60E-BC3A2BB576A8}
+	EndGlobalSection
+EndGlobal
