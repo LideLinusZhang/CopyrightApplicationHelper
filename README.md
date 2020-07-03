@@ -30,3 +30,13 @@
 `BlockCommentEnd`指令用于描述行注释符号，语法为`BlockCommentEnd "符号"`。
 
 *例：*`BlockCommentEnd "*/"`
+
+以下是适用于C\#语言的示例规则文件：
+
+``` numberLines
+File ".cs"
+LineComment "//"
+BlockCommentStart "/*"
+BlockCommentEnd "*/"
+End
+```
