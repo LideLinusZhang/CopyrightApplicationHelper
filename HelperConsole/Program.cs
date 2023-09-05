@@ -1,21 +1,19 @@
-﻿using HelperConsole.ConfigurationModel;
-using HelperConsole.RuleModel;
-using System.Collections.Concurrent;
+﻿using HelperConsole.Configuration;
+using HelperConsole.Processing;
 using System.CommandLine;
-using System.Text.Json;
 
 namespace HelperConsole
 {
     internal class Program
     {
-        static async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var rootCommand = new RootCommand();
 
             var sourceCodeDirectoryOption = new Option<string>("--source-dir")
             {
                 Description = "The path to the source code directory.",
-                IsRequired = true 
+                IsRequired = true
             };
             var configurationFilePathOption = new Option<string>("--config")
             {
@@ -35,7 +33,7 @@ namespace HelperConsole
             var projectVersionOption = new Option<string>("--project-ver")
             {
                 Description = "Project version.",
-                IsRequired = true, 
+                IsRequired = true,
             };
 
             sourceCodeDirectoryOption.AddValidator(result =>
@@ -54,10 +52,10 @@ namespace HelperConsole
             });
             outputFilePathOption.AddValidator(result =>
             {
-                string filePath = result.GetValueForOption(configurationFilePathOption);
+                string filePath = result.GetValueForOption(outputFilePathOption);
 
                 if (File.Exists(filePath))
-                    result.ErrorMessage = $"The file {filePath} already exists.";
+                    result.ErrorMessage = $"The file {filePath} already exists or cannot be accessed.";
             });
 
             rootCommand.AddOption(sourceCodeDirectoryOption);
@@ -74,73 +72,23 @@ namespace HelperConsole
                 string projectName = context.ParseResult.GetValueForOption(projectNameOption);
                 string projectVersion = context.ParseResult.GetValueForOption(projectVersionOption);
 
-                await Process(sourceCodeDirectory, configurationFilePath, outputFilePath, projectName, projectVersion);
+                string title = $"{projectName} {projectVersion}";
+
+                using (var configurationStream = new FileStream(configurationFilePath, FileMode.Open, FileAccess.Read))
+                using (var outputDocument = DocxDocument.CreateDocument(title, outputFilePath))
+                {
+                    var rules = ConfigurationReader.ReadFromStream(configurationStream);
+
+                    var processor = await SourceProcessor.CreateFromRulesAsync(rules);
+
+                    await foreach (var lines in processor.GetProcessedSourceLinesAsync(sourceCodeDirectory))
+                        outputDocument.AppendLine(lines);
+
+                    outputDocument.Save();
+                }
             });
 
             await rootCommand.InvokeAsync(args);
-        }
-
-        private static async Task<List<LanguageRule>> ReadRulesFromConfigurationFile(string configurationFilePath)
-        {
-            using (var fileStream = new FileStream(configurationFilePath, FileMode.Open, FileAccess.Read))
-            {
-                return await JsonSerializer.DeserializeAsync(fileStream, SourceGenerationContext.Default.ListLanguageRule);
-            }
-        }
-
-        private static List<CommentRemover> CreateCommentRemoversBasedOnRules(List<LanguageRule> rules)
-        {
-            var removers = new List<CommentRemover>();
-
-            foreach (var rule in rules)
-                removers.Add(new CommentRemover(rule));
-
-            return removers;
-        }
-
-        private static OutputDocument CreateOutputDocument(string title)
-        {
-            var outputDocument = new OutputDocument();
-
-            outputDocument.AddTitlePage(title);
-            outputDocument.AddHeader(title);
-            outputDocument.AddPageNumbers();
-            outputDocument.AddLineNumbers();
-
-            return outputDocument;
-        }
-
-        private static async Task Process(string sourceCodeDirectory, string configurationFilePath, string outputFilePath, string projectName, string projectVersion)
-        {
-            List<LanguageRule> rules = await ReadRulesFromConfigurationFile(configurationFilePath);
-
-            var removers = new ConcurrentBag<CommentRemover>(CreateCommentRemoversBasedOnRules(rules));
-
-            var processedFileContents = new ConcurrentBag<string>();
-            Parallel.ForEach(Directory.EnumerateFiles(sourceCodeDirectory, "*", SearchOption.AllDirectories), async filePath =>
-            {
-                string extensionName = Path.GetExtension(filePath);
-
-                CommentRemover remover = removers.FirstOrDefault(x => x.IsCompatible(extensionName));
-
-                if (remover is not null)
-                    processedFileContents.Add(await remover.ReadWithoutCommentsAsync(filePath));
-            });
-
-            using (var outputFileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write))
-            using (OutputDocument outputDocument = CreateOutputDocument(""))
-            {
-
-                foreach (var fileContent in processedFileContents)
-                {
-                    var reader = new StringReader(fileContent);
-
-                    while (await reader.ReadLineAsync() is string line && !string.IsNullOrWhiteSpace(line))
-                        outputDocument.AppendLine(line);
-                }
-
-                outputDocument.Save(outputFileStream);
-            }
         }
     }
 }

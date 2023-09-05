@@ -4,10 +4,11 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
-	<!--<PublishAot>true</PublishAot>-->
+	<PublishAot>true</PublishAot>
+	<OptimizationPreference>Size</OptimizationPreference>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="NPOI" Version="2.6.1" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.0.0-beta0002" />
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
   </ItemGroup>
 </Project>
