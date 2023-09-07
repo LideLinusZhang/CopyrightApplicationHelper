@@ -7,6 +7,10 @@ namespace HelperConsole.Processing
     {
         private readonly List<CommentRemover> _removers;
 
+        public delegate void FileProcessedAction(string filePath);
+
+        public event FileProcessedAction OnFileProcessed;
+
         private SourceProcessor(List<CommentRemover> removers)
         {
             _removers = removers;
@@ -34,6 +38,8 @@ namespace HelperConsole.Processing
                             yield return lineWithoutComment;
                     }
                 }
+
+                OnFileProcessed(filePath);
             }
         }
 

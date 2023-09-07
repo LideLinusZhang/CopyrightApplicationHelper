@@ -6,6 +6,11 @@
     <Nullable>disable</Nullable>
 	<PublishAot>true</PublishAot>
 	<OptimizationPreference>Size</OptimizationPreference>
+	<IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+	<InvariantGlobalization>true</InvariantGlobalization>
+	<IlcTrimMetadata>true</IlcTrimMetadata>
+	<IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+	<DebuggerSupport>false</DebuggerSupport>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="DocumentFormat.OpenXml" Version="3.0.0-beta0002" />
