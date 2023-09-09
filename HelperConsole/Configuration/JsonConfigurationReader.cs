@@ -3,9 +3,9 @@ using System.Text.Json;
 
 namespace HelperConsole.Configuration
 {
-    internal static class ConfigurationReader
+    internal sealed class JsonConfigurationReader : IConfigurationReader
     {
-        public static IAsyncEnumerable<LanguageRule> ReadFromStream(Stream stream)
+        public IAsyncEnumerable<LanguageRule> ReadFromStream(Stream stream)
         {
             return JsonSerializer.DeserializeAsyncEnumerable(stream, SourceGenerationContext.Default.LanguageRule);
         }

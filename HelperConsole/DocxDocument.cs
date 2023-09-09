@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+
 using Header = DocumentFormat.OpenXml.Wordprocessing.Header;
 using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
 using SectionProperties = DocumentFormat.OpenXml.Wordprocessing.SectionProperties;
@@ -48,7 +49,7 @@ namespace HelperConsole
 
             paragraph.ParagraphProperties = new ParagraphProperties()
             {
-                Justification = new Justification() { Val = JustificationValues.Left }
+                Justification = new Justification() { Val = JustificationValues.Left },
             };
         }
 
@@ -124,7 +125,7 @@ namespace HelperConsole
             _sectionProperties.PrependChild(footerReference);
         }
 
-        private void AddTitlePage(string title)
+        private void AddTitlePage(string title, string subTitle)
         {
             Paragraph coverPageParagraph = _body.AppendChild(new Paragraph());
 
@@ -147,7 +148,7 @@ namespace HelperConsole
 
             contentRun = coverPageParagraph.AppendChild(new Run());
 
-            contentRun.AppendChild(new Text("源代码"));
+            contentRun.AppendChild(new Text(subTitle));
             contentRun.AppendChild(new Break() { Type = BreakValues.Page });
 
             contentRun.RunProperties = new RunProperties()
@@ -179,12 +180,12 @@ namespace HelperConsole
             _sectionProperties.PrependChild(footerReference); 
         }
 
-        public static DocxDocument CreateDocument(string title, string path)
+        public static DocxDocument CreateDocument(string title, string subTitle, string path)
         {
             var outputDocument = new DocxDocument(path);
 
-            outputDocument.AddTitlePage(title);
-            outputDocument.AddHeader(title + "源代码");
+            outputDocument.AddTitlePage(title, subTitle);
+            outputDocument.AddHeader($"{title} {subTitle}");
             outputDocument.AddPageNumbers();
             outputDocument.AddLineNumbers();
 
