@@ -77,7 +77,8 @@ namespace HelperConsole
                 using (var configurationStream = new FileStream(configurationFilePath, FileMode.Open, FileAccess.Read))
                 using (var outputDocument = DocxDocument.CreateDocument(title, "源代码", outputFilePath))
                 {
-                    var rules = ConfigurationReader.ReadFromStream(configurationStream);
+                    var configurationReader = new JsonConfigurationReader();
+                    var rules = configurationReader.ReadFromStream(configurationStream);
 
                     var processor = await SourceProcessor.CreateFromRulesAsync(rules);
                     processor.OnFileProcessed += (filePath) => Console.WriteLine($"File processed: {filePath}");
