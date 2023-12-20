@@ -1,9 +1,12 @@
-﻿using HelperConsole.Configuration.RuleModel;
-using HelperConsole.Extensions;
+﻿using CopyrightHelper.Library.Configuration.RuleModel;
+using CopyrightHelper.Library.Extensions;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
 
-namespace HelperConsole.Processing
+namespace CopyrightHelper.Library.Processing
 {
-    internal sealed class SourceProcessor
+    public sealed class SourceProcessor
     {
         private readonly List<CommentRemover> _removers;
 

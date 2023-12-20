@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace HelperConsole.Configuration.RuleModel
+namespace CopyrightHelper.Library.Configuration.RuleModel
 {
     [JsonSourceGenerationOptions(WriteIndented = true)]
     [JsonSerializable(typeof(LanguageRule))]
     [JsonSerializable(typeof(BlockCommentRule))]
-    internal partial class SourceGenerationContext : JsonSerializerContext
+    public partial class SourceGenerationContext : JsonSerializerContext
     {
     }
 }

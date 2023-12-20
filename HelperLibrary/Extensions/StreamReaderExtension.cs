@@ -1,6 +1,9 @@
-﻿namespace HelperConsole.Extensions
+﻿using System.Collections.Generic;
+using System.IO;
+
+namespace CopyrightHelper.Library.Extensions
 {
-    internal static class StreamReaderExtension
+    public static class StreamReaderExtension
     {
         public static async IAsyncEnumerable<string> ReadAllLinesAsync(this StreamReader reader)
         {

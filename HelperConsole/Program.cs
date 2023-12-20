@@ -1,5 +1,6 @@
-﻿using HelperConsole.Configuration;
-using HelperConsole.Processing;
+﻿using CopyrightHelper.Library.Configuration;
+using CopyrightHelper.Library.Processing;
+using CopyrightHelper.Output;
 using System.CommandLine;
 
 namespace HelperConsole
@@ -74,10 +75,11 @@ namespace HelperConsole
 
                 string title = $"{projectName} {projectVersion}";
 
+                var configurationReader = new JsonConfigurationReader();
+
                 using (var configurationStream = new FileStream(configurationFilePath, FileMode.Open, FileAccess.Read))
                 using (var outputDocument = DocxDocument.CreateDocument(title, "源代码", outputFilePath))
                 {
-                    var configurationReader = new JsonConfigurationReader();
                     var rules = configurationReader.ReadFromStream(configurationStream);
 
                     var processor = await SourceProcessor.CreateFromRulesAsync(rules);

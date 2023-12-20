@@ -1,9 +1,11 @@
-﻿using HelperConsole.Configuration.RuleModel;
-using HelperConsole.Extensions;
+﻿using CopyrightHelper.Library.Configuration.RuleModel;
+using CopyrightHelper.Library.Extensions;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace HelperConsole.Processing
+namespace CopyrightHelper.Library.Processing
 {
-    internal sealed class CommentRemover
+    public sealed class CommentRemover
     {
         private readonly List<BlockCommentRule> _blockCommentRules;
         private readonly List<string> _blockCommentBeginSymbols;

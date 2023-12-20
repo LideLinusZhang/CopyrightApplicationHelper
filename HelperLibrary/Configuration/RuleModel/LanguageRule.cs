@@ -1,6 +1,8 @@
-﻿namespace HelperConsole.Configuration.RuleModel
+﻿using System.Collections.Generic;
+
+namespace CopyrightHelper.Library.Configuration.RuleModel
 {
-    internal sealed record LanguageRule
+    public sealed record LanguageRule
     {
         public string Name { get; set; }
         public List<string> ExtensionNames { get; set; }
