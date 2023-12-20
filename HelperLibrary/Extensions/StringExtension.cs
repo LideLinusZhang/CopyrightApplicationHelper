@@ -1,6 +1,8 @@
-﻿namespace HelperConsole.Extensions
+﻿using System.Collections.Generic;
+
+namespace CopyrightHelper.Library.Extensions
 {
-    internal static class StringExtension
+    public static class StringExtension
     {
         public static int IndexOfAny(this string s, List<string> anyOf) => s.IndexOfAny(anyOf, out _);
 
@@ -12,7 +14,12 @@
             foreach (string pattern in anyOf)
             {
                 if (lastIndex == -1)
+                {
                     lastIndex = s.IndexOf(pattern);
+
+                    if (lastIndex != -1)
+                        matched = pattern;
+                }
                 else
                 {
                     int index = s.IndexOf(pattern, 0, lastIndex + 1);

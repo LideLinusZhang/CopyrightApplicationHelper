@@ -1,9 +1,12 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperConsole", "HelperConsole\HelperConsole.csproj", "{BCF4F1B6-2A86-4242-BA3F-2062E1A4F615}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopyrightHelper.Console", "HelperConsole\CopyrightHelper.Console.csproj", "{BCF4F1B6-2A86-4242-BA3F-2062E1A4F615}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CopyrightHelper.Library.Test", "HelperConsole.Test\CopyrightHelper.Library.Test.csproj", "{BBCB19ED-1D02-4FC4-9D8A-EABADB4B0D0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopyrightHelper.Library", "HelperLibrary\CopyrightHelper.Library.csproj", "{702F800C-60BE-48FA-83B5-29F50CF7A438}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +18,14 @@ Global
 		{BCF4F1B6-2A86-4242-BA3F-2062E1A4F615}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCF4F1B6-2A86-4242-BA3F-2062E1A4F615}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCF4F1B6-2A86-4242-BA3F-2062E1A4F615}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBCB19ED-1D02-4FC4-9D8A-EABADB4B0D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBCB19ED-1D02-4FC4-9D8A-EABADB4B0D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBCB19ED-1D02-4FC4-9D8A-EABADB4B0D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBCB19ED-1D02-4FC4-9D8A-EABADB4B0D0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{702F800C-60BE-48FA-83B5-29F50CF7A438}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{702F800C-60BE-48FA-83B5-29F50CF7A438}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{702F800C-60BE-48FA-83B5-29F50CF7A438}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{702F800C-60BE-48FA-83B5-29F50CF7A438}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

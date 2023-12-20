@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HelperConsole": {
+      "commandName": "Project",
+      "commandLineArgs": "--source-dir C:\\Users\\zhang\\source\\repos\\CopyrightApplicationHelper --config C:\\Users\\zhang\\Desktop\\config.json --project-name Helper --project-ver 2.0 --output C:\\Users\\zhang\\Desktop\\output.docx"
+    }
+  }
+}

@@ -1,15 +1,15 @@
 ﻿using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-
+using System;
 using Header = DocumentFormat.OpenXml.Wordprocessing.Header;
 using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
 using SectionProperties = DocumentFormat.OpenXml.Wordprocessing.SectionProperties;
 using Text = DocumentFormat.OpenXml.Wordprocessing.Text;
 
-namespace HelperConsole
+namespace CopyrightHelper.Output
 {
-    internal class DocxDocument : IDisposable
+    public sealed class DocxDocument : IDisposable
     {
         private readonly WordprocessingDocument _wordProccessingDocument;
 
@@ -177,7 +177,7 @@ namespace HelperConsole
             };
 
             _sectionProperties.PrependChild(headerReference);
-            _sectionProperties.PrependChild(footerReference); 
+            _sectionProperties.PrependChild(footerReference);
         }
 
         public static DocxDocument CreateDocument(string title, string subTitle, string path)
